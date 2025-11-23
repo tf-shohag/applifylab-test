@@ -39,7 +39,7 @@ The easiest way to run the application is using Docker Compose.
 
 3.  **Access the application**:
     - Frontend: [http://localhost:3000](http://localhost:3000)
-    - Backend API: [http://localhost:8080](http://localhost:8080)
+    - Backend API: [http://localhost:8081](http://localhost:8081)
     - Database: Port 5432
 
 ## 💻 Getting Started (Local Development)
