@@ -13,7 +13,7 @@ export default function FeedMiddle() {
         try {
             setLoading(true);
             const response = await getPosts(1, 20); // Fetch first page for now
-            setPosts(response.data);
+            setPosts(response.data || []);
         } catch (err) {
             console.error('Failed to fetch posts:', err);
             setError('Failed to load posts');

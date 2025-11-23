@@ -25,14 +25,20 @@ func NewUploadHandler(cfg *config.Config) *UploadHandler {
 
 // UploadImage handles image file uploads
 func (h *UploadHandler) UploadImage(c *gin.Context) {
+	fmt.Println("DEBUG: Entering UploadImage handler")
 	file, err := c.FormFile("image")
 	if err != nil {
+		fmt.Printf("DEBUG: Upload error: %v\n", err)
 		utils.ErrorResponse(c, http.StatusBadRequest, "validation_error", "No file uploaded")
 		return
 	}
 
+	// Log file details
+	fmt.Printf("Received file: %s, Size: %d bytes\n", file.Filename, file.Size)
+
 	// Validate file size
 	if file.Size > h.cfg.MaxUploadSize {
+		fmt.Printf("File too large: %d > %d\n", file.Size, h.cfg.MaxUploadSize)
 		utils.ErrorResponse(c, http.StatusBadRequest, "file_too_large",
 			fmt.Sprintf("File size exceeds maximum allowed size of %d bytes", h.cfg.MaxUploadSize))
 		return
@@ -40,6 +46,7 @@ func (h *UploadHandler) UploadImage(c *gin.Context) {
 
 	// Validate file type
 	ext := strings.ToLower(filepath.Ext(file.Filename))
+	fmt.Printf("File extension: %s\n", ext)
 	allowedExts := map[string]bool{
 		".jpg":  true,
 		".jpeg": true,
@@ -49,6 +56,7 @@ func (h *UploadHandler) UploadImage(c *gin.Context) {
 	}
 
 	if !allowedExts[ext] {
+		fmt.Printf("Invalid file extension: %s\n", ext)
 		utils.ErrorResponse(c, http.StatusBadRequest, "invalid_file_type",
 			"Only image files (jpg, jpeg, png, gif, webp) are allowed")
 		return

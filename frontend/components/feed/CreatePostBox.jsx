@@ -1,13 +1,13 @@
 'use client';
 import { useState, useRef } from 'react';
 import { createPost, uploadImage } from '@/lib/api';
+import toast from 'react-hot-toast';
 
 export default function CreatePostBox({ onPostCreated }) {
     const [postContent, setPostContent] = useState('');
     const [selectedImage, setSelectedImage] = useState(null);
     const [imagePreview, setImagePreview] = useState('');
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
     const fileInputRef = useRef(null);
 
     const handleImageSelect = (e) => {
@@ -25,13 +25,12 @@ export default function CreatePostBox({ onPostCreated }) {
 
     const handlePost = async () => {
         if (!postContent.trim() && !selectedImage) {
-            setError('Please write something or select an image');
+            toast.error('Please write something or select an image');
             return;
         }
 
         try {
             setLoading(true);
-            setError('');
 
             let imageUrl = '';
 
@@ -59,7 +58,7 @@ export default function CreatePostBox({ onPostCreated }) {
             }
         } catch (err) {
             console.error('Failed to create post:', err);
-            setError(err?.message || 'Failed to create post');
+            // Error is handled by global interceptor
         } finally {
             setLoading(false);
         }
@@ -102,13 +101,6 @@ export default function CreatePostBox({ onPostCreated }) {
                     >
                         Remove Image
                     </button>
-                </div>
-            )}
-
-            {/* Error Message */}
-            {error && (
-                <div className="alert alert-danger _mar_t16" role="alert">
-                    {error}
                 </div>
             )}
 

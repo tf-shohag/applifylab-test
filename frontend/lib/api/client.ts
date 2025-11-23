@@ -1,4 +1,5 @@
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 // Create axios instance with default config
 const apiClient = axios.create({
@@ -28,6 +29,9 @@ apiClient.interceptors.response.use(
         return response.data;
     },
     (error) => {
+        const message = error.response?.data?.message || error.message || 'Something went wrong';
+        toast.error(message);
+
         if (error.response?.status === 401) {
             // Unauthorized - clear token and redirect to login
             localStorage.removeItem('token');

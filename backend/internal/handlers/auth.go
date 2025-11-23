@@ -41,7 +41,7 @@ type AuthResponse struct {
 func (h *AuthHandler) Register(c *gin.Context) {
 	var req RegisterRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		utils.ErrorResponse(c, http.StatusBadRequest, "validation_error", err.Error())
+		utils.ValidationErrorResponse(c, err)
 		return
 	}
 

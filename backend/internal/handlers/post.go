@@ -38,7 +38,7 @@ func (h *PostHandler) CreatePost(c *gin.Context) {
 
 	var req CreatePostRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		utils.ErrorResponse(c, http.StatusBadRequest, "validation_error", err.Error())
+		utils.ValidationErrorResponse(c, err)
 		return
 	}
 

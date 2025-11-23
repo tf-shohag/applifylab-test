@@ -30,16 +30,12 @@ The easiest way to run the application is using Docker Compose.
 1.  **Clone the repository** (if you haven't already).
 2.  **Run with Docker Compose**:
     ```bash
-    # If you have Docker Compose v2 (most common now):
     docker compose up --build
-
-    # If you have older Docker Compose v1:
-    docker-compose up --build
     ```
 
 3.  **Access the application**:
     - Frontend: [http://localhost:3000](http://localhost:3000)
-    - Backend API: [http://localhost:8081](http://localhost:8081)
+    - Backend API: [http://localhost:8080](http://localhost:8080)
     - Database: Port 5432
 
 ## 💻 Getting Started (Local Development)

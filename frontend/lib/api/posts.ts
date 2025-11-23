@@ -48,7 +48,7 @@ export const getPosts = async (page: number = 1, limit: number = 20): Promise<Pa
     const response = await apiClient.get('/posts', {
         params: { page, limit },
     });
-    return response.data;
+    return response as any;
 };
 
 /**
