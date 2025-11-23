@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Social Feed Application
 
-## Getting Started
+A full-stack social media feed application built with **Next.js** (Frontend) and **Go/Gin** (Backend).
 
-First, run the development server:
+## 🚀 Features
 
+- **Authentication**: User registration and login with JWT.
+- **Social Feed**: View posts from users.
+- **Post Creation**: Create text posts and upload images.
+- **Interactions**: Like posts, comment on posts, like comments.
+- **Profile**: View user profile.
+- **Responsive Design**: Fully responsive UI matching the provided design.
+
+## 🛠 Tech Stack
+
+- **Frontend**: Next.js 15, React, TypeScript, Axios, Bootstrap (CSS).
+- **Backend**: Go 1.23, Gin Framework, GORM.
+- **Database**: PostgreSQL.
+- **Containerization**: Docker, Docker Compose.
+
+## 🐳 Getting Started (Docker) - Recommended
+
+The easiest way to run the application is using Docker Compose.
+
+### Prerequisites
+- Docker and Docker Compose installed.
+
+### Steps
+
+1.  **Clone the repository** (if you haven't already).
+2.  **Run with Docker Compose**:
+    ```bash
+    # If you have Docker Compose v2 (most common now):
+    docker compose up --build
+
+    # If you have older Docker Compose v1:
+    docker-compose up --build
+    ```
+
+3.  **Access the application**:
+    - Frontend: [http://localhost:3000](http://localhost:3000)
+    - Backend API: [http://localhost:8080](http://localhost:8080)
+    - Database: Port 5432
+
+## 💻 Getting Started (Local Development)
+
+If you prefer to run services locally without Docker.
+
+### Prerequisites
+- Node.js (v20+)
+- Go (v1.23+)
+- PostgreSQL running locally
+
+### 1. Database Setup
+Create a PostgreSQL database named `social_feed`:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+createdb social_feed
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Backend Setup
+1.  Navigate to the backend directory:
+    ```bash
+    cd backend
+    ```
+2.  Copy the environment file:
+    ```bash
+    cp .env.example .env
+    ```
+3.  Update `.env` with your database credentials if needed.
+4.  Run the server:
+    ```bash
+    go run cmd/server/main.go
+    ```
+    The server will start on `http://localhost:8080`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Frontend Setup
+1.  Navigate to the frontend directory:
+    ```bash
+    cd frontend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Run the development server:
+    ```bash
+    npm run dev
+    ```
+    The frontend will start on `http://localhost:3000`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📂 Project Structure
 
-## Learn More
+```
+.
+├── backend/                # Go Backend
+│   ├── cmd/server/         # Entry point
+│   ├── internal/           # Application logic (handlers, models, etc.)
+│   └── uploads/            # User uploaded files
+├── frontend/               # Next.js Frontend
+│   ├── app/                # App router pages
+│   ├── components/         # React components
+│   └── lib/api/            # API integration layer
+└── docker-compose.yml      # Docker orchestration
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📝 API Documentation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Detailed API documentation is available in [backend/README.md](backend/README.md).
+Frontend API usage guide is in [frontend/lib/api/README.md](frontend/lib/api/README.md).
+# applifylab-test
